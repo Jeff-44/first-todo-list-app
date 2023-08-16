@@ -1,0 +1,61 @@
+<%- include("partials/header.ejs") %>
+
+    <div class="content">
+        <div class="title">
+            <h1><%=
+                    (function toDay() {
+                        let day = new Date();
+
+                        const days = [
+                                "Sunday",
+                                "Monday",
+                                "Tuesday",
+                                "Wednesday",
+                                "Thursday",
+                                "Friday",
+                                "Saturday"
+                            ];
+
+                        const months = [
+                                    "January",
+                                    "February",
+                                    "March",
+                                    "May",
+                                    "April",
+                                    "June",
+                                    "July",
+                                    "August",
+                                ];
+
+                        return days[day.getDay()] +", "+ months[day.getMonth()] +" "+ day.getDate();
+
+                    })();    
+                %>
+            </h1>
+        </div>
+
+        <div class="tasks">
+            <% if(!locals.tasks || tasks.length == 0){ %>
+
+                <p>No tasks yet</p><hr>
+
+            <% } else{ %>
+
+                <ul>
+                    <% tasks.forEach((task)=>{ %>
+                        <li><input type="checkbox" name="" id=""> <label for="" class=""><%= task %></label><hr></li>
+                    <% }); %>
+                </ul>
+                
+                <% } %>
+
+            <div class="addTask">
+                <form action="/" method="POST">
+                    <input type="text" name="task" id="" placeholder="New task">
+                    <button>+</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+<%- include("partials/footer.ejs") %>
